@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <header>
+
+    </header>
+    <body>
+        <h1 style="size: 30px;">欢迎<span id="uname" style="color: blue;"></span>参与大学生田径运动会</h1>
+        <p>
+            <select name="sports">
+              <optgroup label="个人项目" >
+                  <option value="100m">100m</option>
+                  <option value="200m">200m</option>
+                  <option value="400m">400m</option>
+                  <option value="800m">800m</option>
+                  <option value="1000m">1000m</option>
+                  <option value="5000m">5000m</option>
+                  <option value="跳远">跳远</option>
+                  <option value="跳高">跳高</option>
+                  <option value="三级跳">三级跳</option>
+                  <option value="标枪">标枪</option>
+                  </optgroup>
+
+                  <optgroup label="团体项目" >
+                    <option value="4x100m接力">4x100m接力</option>
+                    <option value="4x400m接力">4x400m接力</option>
+                    
+                    </optgroup>
+            </select>
+        </p>
+        <script>
+            (function () {
+                var logName = window.localStorage.getItem('uname');
+            if(logName){
+                document.getElementById("uname").innerHTML = logName;
+            }else{
+                window.location.href = './indexlx.html'
+            }
+            })();
+            </script>
+    </body>
+</html>

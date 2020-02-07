@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>报名系统</head>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <body>
+        <h1>欢迎来到报名系统</h1>
+
+        
+        <p style="font-size: 30px;color: blueviolet;"> 学号ID:<input name="user"  id="user" type="text"/></p>
+        <p style="font-size: 30px;color: blueviolet;">密码:<input name="password" id="password" type="text"></p>
+       <button onclick="doLogin()">登录</button>
+       <button>注册</button>
+
+    <script>
+        function doLogin(){
+            var user = $('#user').val();
+            var password = $('#password').val();
+            
+            $.ajax({
+           type: "post",
+           url: "http://yi.com/admin/db.php",
+           data: {user,password},
+           success: function (response) {
+               var data = JSON.parse(response);
+               //console.log(response)
+               if(data.code==1){
+        console.log('登陆成功');
+        window.location.href = "./indexlx3.html";
+        window.localStorage.setItem('uname',user)
+        
+               }else{
+                   alert("用户名或密码错误！")
+                console.log('用户名或密码错误!'); 
+                window.localStorage.removeItem('uname')
+               }
+           }
+       }); 
+        }
+
+    </script>
+    </body>
+</html>
