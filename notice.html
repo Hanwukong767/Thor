@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<tilte>amdin 发布通告页</tilte>
+</head>
+<body>
+<p style="font-size: 20px;color: blueviolet;">通告标题:<input type="text"/></p>
+
+<p><fieldset>
+    <h3>请输入通告内容：</h3>
+    <lable for ="comments">
+        <textarea id="comments" rows="50" cols="120"></textarea>
+    </lable>
+</fieldset>
+</p>
+<button onclick="write()">完成</button>
+
+<script>
+ 
+
+function write() {
+    var inputs = $('input');
+    var selcts = $('select');
+    var data = {};
+    for (var i = 0; i < inputs.length; i++) {
+        data[inputs[i].id] = inputs[i].value;
+    }
+
+    for (var j = 0; j < selcts.length; j++) {
+        data[selcts[j].id] = selcts[j].value;
+    }
+
+    console.log(data);
+
+    $.ajax({
+        type: "POST",
+        url: " http://yi.com/admin/notice.php",
+        data,
+        success: function (response) {
+
+            var data = JSON.parse(response);
+            //console.log(response)
+            if (data.code == 1) {
+                console.log('提交');
+                //window.location.href = "./login.html";
+            }
+            //else {
+               // alert("注册失败 请重试！")
+
+            //}
+
+        }
+    });
+
+}
+
+
+
+
+    
+
+</script>
+</body>
+</html>
+

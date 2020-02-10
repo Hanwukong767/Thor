@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>报名系统</head>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+<body>
+    <h1>欢迎来到报名系统</h1>
+
+
+    <p style="font-size: 20px;color: blueviolet;"> 学号ID:<input name="user" id="user" type="text" /></p>
+    <p style="font-size: 20px;color: blueviolet;">密码:<input name="password" id="password" type="text"></p>
+    <p style="font-size: 20px;color: blueviolet;">类型：
+        <label><input type="radio" name="leve" value="admin">amdin</label>
+        <label><input type="radio" name="leve" value="student" checked />学生</label>
+        <label><input type="radio" name="leve" value="manager" />院系管理</label>
+    </p>
+    <button onclick="doLogin()">登录</button>
+    <button onclick="doRegester()">注册</button>
+
+    <script>
+        function doLogin() {
+            var user = $('#user').val();
+            var password = $('#password').val();
+            var choice = $("input[name='leve']:checked").val();
+
+
+            //先访问数据库进行鉴权
+            $.ajax({
+                type: "post",
+                url: "http://yi.com/admin/db.php",
+                data: { user, password, choice },
+                success: function (response) {
+                    var data = JSON.parse(response);
+                    //console.log(response)
+                    if (data.code == 1) {
+
+
+                        window.localStorage.setItem('uname', user);
+                        console.log('登陆成功');
+
+                        if (choice == 'amdin') {
+                            window.location.href = "./admin.html";
+                        } else if (choice == 'student') {
+                            window.location.href = "./student.html";
+                        } else {
+                            window.location.href = "./manager.html";
+                        }
+
+                    } else {
+                        alert("用户名或密码错误！")
+                        console.log('用户名或密码错误!');
+                        window.localStorage.removeItem('uname')
+                    }
+                }
+            });
+        }
+
+
+        function doRegester(){
+            window.location.href ="./regester.html";
+        }
+
+    </script>
+
+
+</body>
+
+</html>

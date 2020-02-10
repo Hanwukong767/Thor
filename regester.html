@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>信息填写</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>请填写你的信息</h1>
+    <fieldset class="fld1">
+        <p>
+            <lable for="name">姓名</lable>
+            <lable><input id="name"></lable>
+        </p>
+        <p><label for="sex">性别 </label>
+            <select id="sex">
+                <option value="0">女</option>
+                <option value="1">男</option>
+            </select>
+            <p>
+                <lable for="password">密码</lable>
+                <lable><input id="password" type="password"></lable>
+            </p>
+        </p>
+        <p>
+            <lable for="num">学号</lable>
+            <lable><input id="num"></lable>
+        </p>
+        <p>学院：
+            <select id="colle">
+                <optgroup label="院系">
+                    <option value="光电学院">光电学院</option>
+                    <option value="机电学院">机电学院</option>
+                    <option value="材料与高分子学院">材料与高分子学院</option>
+                    <option value="计算机科学与技术学院">计算机科学与技术学院</option>
+                    <option value="经济管理学院">经济管理学院</option>
+                    <option value="水利学院">水利学院</option>
+                    <option value="体育学院">体育学院</option>
+                    <option value="艺术学院">艺术学院</option>
+                    <option value="传媒学院">传媒学院</option>
+                </optgroup>
+            </select>
+        </p>
+
+        <p>专业：
+            <select id="major">
+                <optgroup label="专业">
+                    <option value="光电学院">光电学院</option>
+                    <option value="机电学院">机电学院</option>
+                    <option value="材料与高分子学院">材料与高分子学院</option>
+                    <option value="计算机科学与技术学院">计算机科学与技术学院</option>
+                    <option value="经济管理学院">经济管理学院</option>
+                    <option value="水利学院">水利学院</option>
+                    <option value="体育学院">体育学院</option>
+                    <option value="艺术学院">艺术学院</option>
+                    <option value="传媒学院">传媒学院</option>
+                </optgroup>
+            </select>
+        </p>
+
+        <p>
+            <lable for="phone">手机</lable>
+            <lable><input id="phone"></lable>
+        </p>
+        <p>
+            <lable for="email">邮箱</lable>
+            <lable><input id="email"></lable>
+        </p>
+        <button onclick="reg()">完成</button>
+    </fieldset>
+    <script>
+
+        function reg() {
+            var inputs = $('input');
+            var selcts = $('select');
+            var data = {};
+            for (var i = 0; i < inputs.length; i++) {
+                data[inputs[i].id] = inputs[i].value;
+            }
+
+            for (var j = 0; j < selcts.length; j++) {
+                data[selcts[j].id] = selcts[j].value;
+            }
+
+            console.log(data);
+
+            $.ajax({
+                type: "POST",
+                url: " http://yi.com/admin/regester.php",
+                data,
+                success: function (response) {
+
+                    var data = JSON.parse(response);
+                    //console.log(response)
+                    if (data.code == 1) {
+                        console.log('注册成功');
+                        window.location.href = "./login.html";
+                    }
+                    else {
+                        alert("注册失败 请重试！")
+
+                    }
+
+                }
+            });
+
+        }
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+</body>
+
+</html>

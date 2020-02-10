@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <title>show table </title>
+</head>
+<body>
+    <?php
+
+
+    $con = mysqli_connect('localhost','root','','db_thor');
+    
+    if (!$con)
+    
+    {
+    
+        die('Could not connect: ' . mysqli_error($con));
+    
+    }
+    
+    
+    
+    mysqli_select_db($con,"student");
+    
+    
+    mysqli_set_charset($con, "utf8");
+    
+    
+    
+    $sql = "select stu_id, stu_name, stu_academy, stu_major, stu_sex, stu_email, stu_phone from student
+    
+    
+    $result = mysqli_query($con,$sql);
+    
+    
+    echo "<table border='1'>
+    
+    <tr>
+    
+    <th>学号</th>
+    
+    <th>姓名</th>
+    
+    <th>学院</th>
+    
+    <th>专业</th>
+    
+    <th>性别</th>
+    
+    <th>邮箱</th>
+    
+    <th>电话</th>
+    
+    
+    </tr>";
+    
+    
+    
+    while($row = mysqli_fetch_array($result))
+    
+    {
+    
+        echo "<tr>";
+    
+        echo "<td>" . $row['stu_id'] . "</td>";
+    
+        echo "<td>" . $row['stu_name'] . "</td>";
+    
+        echo "<td>" . $row['stu_academy'] . "</td>";
+    
+        echo "<td>" . $row['stu_major'] . "</td>";
+    
+        echo "<td>" . $row[stu_sex] . "</td>";
+    
+        echo "<td>" . $row[stu_email] . "</td>";
+    
+        echo "<td>" . $row[stu_phone] . "</td>";
+    
+        echo "</tr>";
+    
+    }
+    
+    echo "</table>";
+    
+    
+    
+    mysqli_close($con);
+    
+    
+    
+    ?>
+    
+</body>
+</html>
